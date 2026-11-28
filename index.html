@@ -15,10 +15,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Son of God</title>
-    <script type="module" crossorigin src="./index-DnBMFOXi.js"></script>
-    <link rel="stylesheet" crossorigin href="./index-D_my2qyT.css">
+    <script type="module" crossorigin src="./index-CRBI8CL9.js"></script>
+    <link rel="stylesheet" crossorigin href="./index-DnggMXUj.css">
   <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
   <body>
     <div id="root"></div>
+    <!-- if the app's files can't start (old cached copy, broken network), never stay on a blank/loading page -->
+    <div id="boot-fail" style="display:none;position:fixed;inset:0;z-index:999;background:#F4F4F5;font-family:'Work Sans',system-ui,sans-serif;padding:calc(env(safe-area-inset-top) + 96px) 24px 24px;text-align:center;color:#0D0D0D">
+      <h2 style="margin:0 0 8px;font-size:21px">Couldn’t open the app · مقدرناش نفتح التطبيق</h2>
+      <p style="margin:0 0 24px;color:#6B7280;font-size:15px">Tap to load the latest version · دوس عشان تحمّل آخر نسخة</p>
+      <button id="boot-retry" style="height:52px;width:100%;max-width:360px;border:0;border-radius:12px;background:#7C3AED;color:#fff;font-size:17px;font-weight:600">Reload · حمّل تاني</button>
+    </div>
+    <script>
+      (function () {
+        function fresh() {
+          var jobs = []
+          try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (r) { return Promise.all(r.map(function (x) { return x.unregister() })) })) } catch (e) {}
+          try { if (window.caches) jobs.push(caches.keys().then(function (k) { return Promise.all(k.filter(function (n) { return n !== 'photos' }).map(function (n) { return caches.delete(n) })) })) } catch (e) {}
+          Promise.all(jobs).catch(function () {}).then(function () { location.replace(location.pathname + '?v=' + Date.now() + location.hash) })
+        }
+        document.getElementById('boot-retry').onclick = fresh
+        setTimeout(function () { if (!window.__sogBooted) document.getElementById('boot-fail').style.display = 'block' }, 12000)
+      })()
+    </script>
   </body>
 </html>
