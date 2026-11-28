@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>Son of God</title>
-    <script type="module" crossorigin src="./index-BqjHmwjH.js"></script>
+    <script type="module" crossorigin src="./index-CACt01uR.js"></script>
     <link rel="stylesheet" crossorigin href="./index-oQ8OR-Rp.css">
   <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
   <body>
@@ -31,7 +31,7 @@
         function fresh() {
           var jobs = []
           try { if (navigator.serviceWorker) jobs.push(navigator.serviceWorker.getRegistrations().then(function (r) { return Promise.all(r.map(function (x) { return x.unregister() })) })) } catch (e) {}
-          try { if (window.caches) jobs.push(caches.keys().then(function (k) { return Promise.all(k.filter(function (n) { return n !== 'photos' }).map(function (n) { return caches.delete(n) })) })) } catch (e) {}
+          try { if (window.caches) jobs.push(caches.keys().then(function (k) { return Promise.all(k.filter(function (n) { return n !== 'photos-v2' }).map(function (n) { return caches.delete(n) })) })) } catch (e) {}
           Promise.all(jobs).catch(function () {}).then(function () { location.replace(location.pathname + '?v=' + Date.now() + location.hash) })
         }
         document.getElementById('boot-retry').onclick = fresh
